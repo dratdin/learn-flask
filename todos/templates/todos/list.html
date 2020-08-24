@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row mb-3">
+    <div class="col-12">
+        <a href="{{ url_for('todos.todos_new') }}" type="button" class="btn btn-success">+ New task</a>
+    </div>
+</div>
+
+<div class="row">
+{% for todo in todos %}
+    {% include 'todos/_list_item.html' %}
+{% endfor %}
+</div>
+
+{% endblock %}

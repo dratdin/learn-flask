@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row">
+{% for todo in todos %}
+    {% include 'todos/_list_item.html'  %}
+{% endfor %}
+</div>
+
+{% endblock %}
