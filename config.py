@@ -19,7 +19,7 @@ class ProductionConfig(Config):
     pass
 
 
-config = {
+configs = {
     'local': LocalConfig,
     'production': ProductionConfig,
 

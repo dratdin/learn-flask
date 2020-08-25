@@ -2,13 +2,23 @@
 
 {% block content %}
 
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+    {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+{% endwith %}
+
 <div class="row mb-3">
     <div class="col-12">
-        <a href="{{ url_for('todos.todos_new') }}" type="button" class="btn btn-success">+ New task</a>
+        <a href="{{ url_for('todos.create') }}" type="button" class="btn btn-success">+ New task</a>
     </div>
 </div>
 
-<div class="row">
+<div class="card-deck">
 {% for todo in todos %}
     {% include 'todos/_list_item.html' %}
 {% endfor %}
