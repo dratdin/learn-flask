@@ -1,6 +1,9 @@
 {% extends "base.html" %}
+{% from 'forms.html' import back_button %}
 
 {% block content %}
+
+{{ back_button(url_for("todos.list")) }}
 
 {% include 'todos/_change_form.html' %}
 

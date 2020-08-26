@@ -1,11 +1,11 @@
-<div class="card shadow-sm mb-4" style="width: 18rem;">
+<div class="card">
     <div class="card-header">
         <a href="{{ url_for('todos.detail', id=todo._id) }}">
-            <h5 class="card-title my-0 d-inline-block">{{ todo.title }}</h5>
+            <h6 class="card-title my-0 d-inline-block">{{ todo.title }}</h6>
         </a>
     </div>
     <div class="card-body">
-        <div style="min-height: 100px">
+        <div style="min-height: 90px">
             <p class="card-text">{{ todo.text|default('-', true) }}</p>
         </div>
         {% if todo.url %}

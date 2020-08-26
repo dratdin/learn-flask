@@ -1,16 +1,7 @@
 {% extends "base.html" %}
+{% from 'forms.html' import flash_messages %}
 
 {% block content %}
-
-{% with messages = get_flashed_messages(with_categories=true) %}
-{% if messages %}
-    {% for category, message in messages %}
-        <div class="alert alert-{{ category }}">
-            {{ message }}
-        </div>
-    {% endfor %}
-{% endif %}
-{% endwith %}
 
 <div class="row mb-3">
     <div class="col-12">
@@ -18,9 +9,13 @@
     </div>
 </div>
 
-<div class="card-deck">
+{{ flash_messages() }}
+
+<div class="row row-cols-1 row-cols-md-4">
 {% for todo in todos %}
-    {% include 'todos/_list_item.html' %}
+    <div class="col mb-4">
+        {% include 'todos/_list_item.html' %}
+    </div>
 {% endfor %}
 </div>
 
