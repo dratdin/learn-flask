@@ -1,5 +1,7 @@
 import os
+
 from flask import render_template
+
 from . import create_app, mongo
 
 app = create_app(os.getenv("FLASK_CONFIG") or "default")

@@ -1,10 +1,11 @@
 import os
+
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config:
-    SECRET_KEY = os.environ.get('SECRET_KEY')
-    MONGO_URI = os.environ.get('MONGO_URI')
+    SECRET_KEY = os.environ.get("SECRET_KEY")
+    MONGO_URI = os.environ.get("MONGO_URI")
 
     @staticmethod
     def init_app(app):
@@ -19,9 +20,4 @@ class ProductionConfig(Config):
     pass
 
 
-configs = {
-    'local': LocalConfig,
-    'production': ProductionConfig,
-
-    'default': LocalConfig
-}
+configs = {"local": LocalConfig, "production": ProductionConfig, "default": LocalConfig}

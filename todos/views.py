@@ -1,6 +1,7 @@
 import datetime
-from flask import render_template, flash, redirect, url_for
-from flask_wtf import FlaskForm
+
+from flask import flash, redirect, render_template, url_for
+
 from .. import mongo
 from . import todos as todos_blueprint
 from .forms import TodoCreateForm, TodoUpdateForm
@@ -22,7 +23,9 @@ def create():
                     "title": form.title.data,
                     "text": form.text.data,
                     "url": form.url.data,
-                    "date": datetime.datetime.combine(form.date.data, datetime.time.min),
+                    "date": datetime.datetime.combine(
+                        form.date.data, datetime.time.min
+                    ),
                 }
             )
 
@@ -53,7 +56,9 @@ def update(id):
                         "title": form.title.data,
                         "text": form.text.data,
                         "url": form.url.data,
-                        "date": datetime.datetime.combine(form.date.data, datetime.time.min)
+                        "date": datetime.datetime.combine(
+                            form.date.data, datetime.time.min
+                        ),
                     }
                 },
             )
@@ -67,6 +72,6 @@ def update(id):
 @todos_blueprint.route("/todos/<ObjectId:id>", methods=["POST"])
 def delete(id):
     title = mongo.db.todos.find_one_or_404(id)["title"]
-    mongo.db.todos.delete_one({'_id': id})
+    mongo.db.todos.delete_one({"_id": id})
     flash(f"Todo {title} successfully deleted", "success")
     return redirect(url_for("todos.list"))
