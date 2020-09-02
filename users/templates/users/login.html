@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% from 'forms.html' import render_field, flash_messages %}
+
+{% block navbar %}{% endblock %}
+
+{% block content %}
+    {{ flash_messages() }}
+
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Log In</legend>
+                <div class="form-group">{{ render_field(form.email) }}</div>
+                <div class="form-group">{{ render_field(form.password) }}</div>
+                <div class="form-group">
+                    <div class="form-check">
+                        {{ form.remember(class="form-check-input") }}
+                        {{ form.remember.label(class="form-check-label") }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-outline-success") }}
+                </div>
+                <small class="text-muted ml-2">
+                    <a href="">Fogot password</a>
+                </small>
+            </fieldset>
+        </form>
+    </div>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            Or join us right now! <a href="{{ url_for('users.register') }}" class="ml-2">Sign Up</a>
+        </small>
+    </div>
+{% endblock %}

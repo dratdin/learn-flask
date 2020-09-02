@@ -1,19 +1,22 @@
 import datetime
 
 from flask import flash, redirect, render_template, url_for
+from flask_login import login_required
 
 from .. import mongo
-from . import todos as todos_blueprint
+from . import todos as blueprint
 from .forms import TodoCreateForm, TodoUpdateForm
 
 
-@todos_blueprint.route("/todos")
+@blueprint.route("/todos")
+@login_required
 def list():
     todos = mongo.db.todos.find()
     return render_template("todos/list.html", todos=todos)
 
 
-@todos_blueprint.route("/todos/new", methods=["GET", "POST"])
+@blueprint.route("/todos/new", methods=["GET", "POST"])
+@login_required
 def create():
     form = TodoCreateForm()
     if form.is_submitted():
@@ -37,13 +40,15 @@ def create():
     return render_template("todos/create.html", form=form)
 
 
-@todos_blueprint.route("/todos/<ObjectId:id>")
+@blueprint.route("/todos/<ObjectId:id>")
+@login_required
 def detail(id):
     todo = mongo.db.todos.find_one_or_404(id)
     return render_template("todos/detail.html", todo=todo)
 
 
-@todos_blueprint.route("/todos/<ObjectId:id>/edit", methods=["GET", "POST"])
+@blueprint.route("/todos/<ObjectId:id>/edit", methods=["GET", "POST"])
+@login_required
 def update(id):
     todo = mongo.db.todos.find_one_or_404(id)
     form = TodoUpdateForm(data=todo)
@@ -69,7 +74,8 @@ def update(id):
     return render_template("todos/update.html", form=form, todo=todo)
 
 
-@todos_blueprint.route("/todos/<ObjectId:id>", methods=["POST"])
+@blueprint.route("/todos/<ObjectId:id>", methods=["POST"])
+@login_required
 def delete(id):
     title = mongo.db.todos.find_one_or_404(id)["title"]
     mongo.db.todos.delete_one({"_id": id})
