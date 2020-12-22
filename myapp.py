@@ -5,7 +5,7 @@ from flask_login import login_required
 
 from . import create_app, mongo
 
-app = create_app(os.getenv("FLASK_CONFIG") or "default")
+app = create_app(os.environ.get("FLASK_CONFIG", "default"))
 
 
 @app.shell_context_processor

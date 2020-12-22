@@ -22,7 +22,7 @@ def create_app(config_name):
     app = Flask(__name__)
     app.config.from_object(configs[config_name])
     configs[config_name].init_app(app)
-    mongo.init_app(app)
+    mongo.init_app(app, port=int(app.config.get("MONGO_PORT")), host=app.config.get("MONGO_HOST"))
     bcrypt.init_app(app)
     session.init_app(app)
     login_manager.init_app(app)
